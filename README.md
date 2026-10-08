@@ -67,18 +67,9 @@ run.py        # CLI
 CSV with header `group,visitors,conversions` (exactly 2 groups), or JSON list
 of two `{"group", "visitors", "conversions"}` objects.
 
-## Interview talking points
+## Limitations
 
-- **Why pooled SE for the test but unpooled for the CI?** Under H0 the two rates
-  are assumed equal, so pooling is the right standard error for the test
-  statistic; the CI makes no such assumption, so it uses each group's own
-  variance.
-- **Why does SRM come first?** A p-value assumes the randomization worked. SRM
-  (chi-square on the traffic split) is a data-quality gate: garbage in,
-  "significant" garbage out.
-- **No scipy?** The normal CDF via `math.erf` and the chi-square(1df)-to-normal
-  identity keep it dependency-free and fully explainable.
-- **Limitations (say these before they ask):** binary outcomes only, no
-  sequential testing / peeking correction, no multiple-comparison correction,
-  fixed-horizon design. Natural extensions: Welch's t-test for continuous
-  metrics, CUPED variance reduction, sequential monitoring with alpha spending.
+Binary conversion outcomes only; no sequential testing / peeking correction;
+no multiple-comparison correction; fixed-horizon design. Natural extensions:
+Welch's t-test for continuous metrics, CUPED variance reduction, sequential
+monitoring with alpha spending.
